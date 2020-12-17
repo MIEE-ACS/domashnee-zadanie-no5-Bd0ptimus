@@ -1,0 +1,72 @@
+﻿<Window x:Class="DZ5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DZ5"
+        mc:Ignorable="d"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid Margin="0,30,0,209">
+            <Grid Margin="0,0,539,95">
+                <Label Content="Nation" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                <TextBox x:Name="InputNation" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="0,33,0,0" TextChanged="Check_Format_Input"/>
+                <Label Foreground="Red" x:Name="InputNationWarning" Content="The Nation Must Include a-z letters" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,-8,0,0"/>
+                <Label x:Name="NationEmpty" Content="Input Name Of Nation(*)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="51,-8,0,0"/>
+            </Grid>
+            <Grid Margin="0,80,539,11">
+                <Label Content="Region" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,7,0,0"/>
+                <TextBox x:Name="InputRegion" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="0,33,0,0" TextChanged="Check_Format_Input"/>
+                <Label Foreground="Red" x:Name="InputRegionWarning" Content="The Region Must Include a-z letters" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,2,0,0"/>
+                <Label x:Name="RegionEmpty" Content="Input Region(*)" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52,2,0,0"/>
+            </Grid>
+            <Grid Margin="258,0,286,100">
+                <Label Content="City/Town" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                <TextBox x:Name="InputCity" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="0,33,0,0" TextChanged="Check_Format_Input"/>
+                <Label Foreground="Red" x:Name="InputCityWarning" Content="The City Must Include a-z letters" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,-8,0,0"/>
+                <Label x:Name="CityEmpty" Content="Input Name Of City(*)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="62,-8,0,0"/>
+            </Grid>
+            <Grid Margin="258,80,286,25">
+                <Label Content="Street" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,7,0,0"/>
+                <TextBox x:Name="InputStreet" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="0,33,0,0" TextChanged="Check_Format_Input"/>
+                <Label Foreground="Red" x:Name="InputStreetWarning" Content="The Street Must Include a-z, 0-9 letters" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,2,0,0"/>
+                <Label x:Name="StreetEmpty" Content="Input Name Street(*)" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="62,2,0,0"/>
+            </Grid>
+            <Grid Margin="511,0,22,100">
+                <Label Content="House Number" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                <TextBox x:Name="InputHouse" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="0,33,0,0" TextChanged="Check_Format_Input"/>
+                <Label Foreground="Red" x:Name="InputHouseWarning" Content="The Postcode Must Include 0-9 letters" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="48,-8,-8,0" RenderTransformOrigin="0.505,0.231"/>
+                <Label x:Name="HouseEmpty" Content="Input Postcode Includes 6 Digits(*)" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="53,-8,0,0" RenderTransformOrigin="0.526,0"/>
+            </Grid>
+            <Grid Margin="511,80,22,25">
+                <Label Content="Postcode" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,7,0,0"/>
+                <TextBox x:Name="InputPostcode" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="0,33,0,0" TextChanged="Check_Format_Input"/>
+                <Label Foreground="Red" x:Name="InputPostcodeWarning" Content="The Postcode Must Include 0-9 letters" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="63,2,-23,0"/>
+                <Label x:Name="PostcodeEmpty" Content="Input Postcode Includes 6 Digits(*)" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="53,2,0,0"/>
+            </Grid>
+            <Button x:Name="EnterBtn" Content="Enter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="684,150,0,0" Cursor="Hand" IsEnabled="False" Click="EnterBtn_Click"/>
+            <Button x:Name="DeleteBtn" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="569,150,0,0" Cursor="Hand" IsEnabled="False" Click="DeleteBtn_Click"/>
+        </Grid>
+        <Grid Margin="0,210,0,0">
+            <Label Content="Entered addresses" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+            <ListView x:Name="ListResult" HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="774" Margin="10,52,0,0" MouseDoubleClick="ListResult_SelectionChanged">
+                <ListView.View>
+                    <GridView ColumnHeaderStringFormat="">
+                        <GridViewColumn Header="Nation" Width="120" DisplayMemberBinding="{Binding NationOutput}"/>
+                        <GridViewColumn Header="Region" Width="120" DisplayMemberBinding="{Binding RegionOutput}"/>
+                        <GridViewColumn Header="City/Town" Width="120" DisplayMemberBinding="{Binding CityOutput}"/>
+                        <GridViewColumn Header="Street" Width="120" DisplayMemberBinding="{Binding StreetOutput}"/>
+                        <GridViewColumn Header="House" Width="120" DisplayMemberBinding="{Binding HouseOutput}"/>
+                        <GridViewColumn Header="Postcode" Width="120" DisplayMemberBinding="{Binding PostcodeOutput}"/>
+                    </GridView>
+                </ListView.View>
+
+            </ListView>
+
+        </Grid>
+
+
+    </Grid>
+</Window>
